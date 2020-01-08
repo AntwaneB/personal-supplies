@@ -1,5 +1,7 @@
 {
   "name": "personal-supplies",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "angular"
 }

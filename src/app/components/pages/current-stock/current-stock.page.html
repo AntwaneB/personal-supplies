@@ -1,0 +1,55 @@
+<ion-header>
+	<ion-toolbar>
+		<ion-title>
+			Your current stock
+		</ion-title>
+	</ion-toolbar>
+
+	<ion-toolbar>
+		<ion-searchbar #searchBar (ionChange)="filter(searchBar.value)"></ion-searchbar>
+	</ion-toolbar>
+</ion-header>
+
+<ion-content>
+	<ion-list *ngIf="products?.length > 0">
+		<ion-item class="product"
+			*ngFor="let productStock of products"
+			(click)="editQuantity(productStock, editMode == EditMode.ADD ? 1 : -1)"
+			[ngClass]="'stock-status-' + StockStatus[productStock.status].toLowerCase()"
+		>
+			<ion-label>{{ productStock.product.name }}</ion-label>
+			<ion-note class="stock-status">{{ productStock.currentStock }} / {{ productStock.targetStock }}</ion-note>
+		</ion-item>
+	</ion-list>
+
+	<ion-text *ngIf="!(products?.length > 0)">
+		<p class="ion-text-center">
+			You have not registered any product in your target stock.
+		</p>
+		<p class="ion-text-center">
+			<ion-button>Click here to register the first item</ion-button>
+		</p>
+	</ion-text>
+</ion-content>
+
+<ion-footer *ngIf="products?.length > 0">
+	<ion-grid>
+		<ion-row>
+			<ion-col>
+				<ion-text color="medium">
+					<p class="ion-text-center ion-no-margin">
+						Select the mode below and click an item in the list to add or remove 1 from your current stock
+					</p>
+				</ion-text>
+			</ion-col>
+		</ion-row>
+		<ion-row>
+			<ion-col class="ion-no-padding">
+				<ion-button expand="block" (click)="editMode = EditMode.ADD" [color]="editMode == EditMode.ADD ? 'primary' : 'medium'">Add quantity</ion-button>
+			</ion-col>
+			<ion-col class="ion-no-padding">
+				<ion-button expand="block" (click)="editMode = EditMode.REMOVE" [color]="editMode == EditMode.REMOVE ? 'primary' : 'medium'">Remove quantity</ion-button>
+			</ion-col>
+		</ion-row>
+	</ion-grid>
+</ion-footer>

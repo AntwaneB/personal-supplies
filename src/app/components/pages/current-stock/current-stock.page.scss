@@ -1,0 +1,22 @@
+.product {
+
+	.stock-status {
+		font-weight: bold;
+	}
+	&.stock-status-critical {
+		.stock-status { color: var(--ion-color-danger); }
+	}
+	&.stock-status-low {
+		.stock-status { color: var(--ion-color-warning-shade); }
+	}
+	&.stock-status-medium {
+		.stock-status { color: var(--ion-color-warning-shade); }
+	}
+	&.stock-status-high {
+		.stock-status { color: var(--ion-color-warning-shade); }
+	}
+	&.stock-status-full {
+		.stock-status { color: var(--ion-color-success); }
+	}
+}
+
