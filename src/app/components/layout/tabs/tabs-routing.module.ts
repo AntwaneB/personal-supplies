@@ -18,12 +18,12 @@ const routes: Routes = [
 				]
 			},
 			{
-				path: 'target-stock',
+				path: 'add-product',
 				children: [
 					{
 						path: '',
 						loadChildren: () =>
-							import('../../pages/target-stock/target-stock.module').then(m => m.TargetStockPageModule)
+							import('../../pages/add-product/add-product.module').then(m => m.AddProductPageModule)
 					}
 				]
 			},

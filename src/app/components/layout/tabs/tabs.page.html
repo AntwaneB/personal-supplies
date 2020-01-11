@@ -2,13 +2,13 @@
 
     <ion-tab-bar slot="bottom">
         <ion-tab-button tab="current-stock">
-            <ion-icon name="alert"></ion-icon>
+            <ion-icon name="apps"></ion-icon>
             <ion-label>Current Stock</ion-label>
         </ion-tab-button>
 
-        <ion-tab-button tab="target-stock">
-            <ion-icon name="apps"></ion-icon>
-            <ion-label>Target stock</ion-label>
+        <ion-tab-button (click)="addProduct()">
+            <ion-icon name="add"></ion-icon>
+            <ion-label>Register new product</ion-label>
         </ion-tab-button>
     </ion-tab-bar>
 

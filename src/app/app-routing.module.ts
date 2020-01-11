@@ -1,10 +1,28 @@
 import {NgModule} from '@angular/core';
 import {PreloadAllModules, RouterModule, Routes} from '@angular/router';
+import {AppComponent} from './app.component';
 
 const routes: Routes = [
 	{
+		path: 'pages',
+		component: AppComponent,
+		children: [
+			{
+				path: 'current-stock',
+				children: [
+					{
+						path: '',
+						loadChildren: () =>
+							import('./components/pages/current-stock/current-stock.module').then(m => m.CurrentStockPageModule)
+					}
+				]
+			}
+		]
+	},
+	{
 		path: '',
-		loadChildren: () => import('./components/layout/tabs/tabs.module').then(m => m.TabsPageModule)
+		redirectTo: '/pages/current-stock',
+		pathMatch: 'full'
 	}
 ];
 

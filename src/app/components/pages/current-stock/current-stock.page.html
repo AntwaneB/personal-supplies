@@ -30,10 +30,25 @@
 			<ion-button>Click here to register the first item</ion-button>
 		</p>
 	</ion-text>
+
+	<ion-fab vertical="bottom" horizontal="end" edge slot="fixed">
+		<ion-fab-button (click)="addProduct()">
+			<ion-icon name="add"></ion-icon>
+		</ion-fab-button>
+	</ion-fab>
 </ion-content>
 
 <ion-footer *ngIf="products?.length > 0">
 	<ion-grid>
+		<ion-row>
+			<ion-col class="ion-no-padding">
+				<ion-button expand="block" (click)="editMode = EditMode.ADD" [color]="editMode == EditMode.ADD ? 'secondary' : 'medium'">Add quantity</ion-button>
+			</ion-col>
+			<ion-col class="ion-no-padding">
+				<ion-button expand="block" (click)="editMode = EditMode.REMOVE" [color]="editMode == EditMode.REMOVE ? 'secondary' : 'medium'">Remove quantity</ion-button>
+			</ion-col>
+		</ion-row>
+
 		<ion-row>
 			<ion-col>
 				<ion-text color="medium">
@@ -41,14 +56,6 @@
 						Select the mode below and click an item in the list to add or remove 1 from your current stock
 					</p>
 				</ion-text>
-			</ion-col>
-		</ion-row>
-		<ion-row>
-			<ion-col class="ion-no-padding">
-				<ion-button expand="block" (click)="editMode = EditMode.ADD" [color]="editMode == EditMode.ADD ? 'primary' : 'medium'">Add quantity</ion-button>
-			</ion-col>
-			<ion-col class="ion-no-padding">
-				<ion-button expand="block" (click)="editMode = EditMode.REMOVE" [color]="editMode == EditMode.REMOVE ? 'primary' : 'medium'">Remove quantity</ion-button>
 			</ion-col>
 		</ion-row>
 	</ion-grid>

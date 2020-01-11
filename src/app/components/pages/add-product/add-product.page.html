@@ -1,0 +1,31 @@
+<ion-header>
+	<ion-toolbar>
+		<ion-title>Register a new product</ion-title>
+	</ion-toolbar>
+</ion-header>
+
+<div class="inner-content">
+	<form (submit)="null" *ngIf="success === null">
+		<ion-list lines="none" class="ion-no-margin">
+			<ion-item>
+				<ion-label position="stacked">Product name <ion-text color="danger">*</ion-text></ion-label>
+				<ion-input name="name" required type="text" [(ngModel)]="product.product.name"></ion-input>
+			</ion-item>
+
+			<ion-item>
+				<ion-label position="stacked">Target quantity <ion-text color="danger">*</ion-text></ion-label>
+				<ion-input name="target-stock" required type="number" min="1" [(ngModel)]="product.targetStock"></ion-input>
+			</ion-item>
+		</ion-list>
+
+		<ion-button type="submit" expand="block" color="primary" (click)="addProduct()">Register this new product</ion-button>
+	</form>
+
+	<p *ngIf="success === true" class="ion-text-center">
+		Your new product has been register.
+	</p>
+
+	<p *ngIf="success === false" class="ion-text-center">
+		An error occured while registering your new product.
+	</p>
+</div>

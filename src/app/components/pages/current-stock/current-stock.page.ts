@@ -2,7 +2,9 @@ import {Component, OnInit} from '@angular/core';
 import {CurrentProductStock} from '../../../models/current-product-stock.model';
 import {Stock} from '../../../models/stock.model';
 import {StockStatus} from '../../../models/stock-status.enum';
-import {CurrentStockService} from '../../../services/current-stock.service';
+import {StockService} from '../../../services/stock.service';
+import {AddProductPage} from '../add-product/add-product.page';
+import {ModalController} from '@ionic/angular';
 
 @Component({
 	selector: 'app-current-stock',
@@ -28,17 +30,36 @@ export class CurrentStockPage implements OnInit {
 		return this._products;
 	}
 
-	public constructor(private currentStockService: CurrentStockService) {
+	public constructor(
+		private currentStockService: StockService,
+		private modalController: ModalController
+	) {
 	}
 
 	public ngOnInit(): void {
+		this.refresh();
+	}
+
+	public refresh() {
 		this.currentStockService.get().subscribe(stock => {
-			console.log(stock);
 			this.stock = new Stock<CurrentProductStock>(CurrentProductStock, stock);
 			this._products = this.stock.products;
 
 			this.sort('product.name', true);
 		});
+	}
+
+	public async addProduct() {
+		const modal = await this.modalController.create({
+			component: AddProductPage,
+			cssClass: 'auto-height bottom'
+		});
+
+		modal.onDidDismiss().then(data => {
+			this.refresh();
+		});
+
+		return await modal.present();
 	}
 
 	public editQuantity(product: CurrentProductStock, changeAmount: number) {
